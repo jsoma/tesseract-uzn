@@ -1,0 +1,39 @@
+# Copy everything to a temp directory
+
+uzn_file=$1
+image_file=$2
+
+if [ ! -f $uzn_file ]
+then
+  echo "Cannot find $uzn_file, exiting" 1>&2
+  exit 1
+fi
+
+if [ ! -f $image_file ]
+then
+  echo "Cannot find $image_file, exiting" 1>&2
+  exit 1
+fi
+
+if [ ${uzn_file: -4} == ".uzn" ]
+then
+  :
+else
+  echo "First parameter must be .uzn file, exiting" 1>&2
+  exit 1
+fi
+
+tmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir'`
+
+filename=$(basename "$image_file")
+extension=${image_file#*.}
+
+uzn_tmp=$tmpdir/$filename.uzn
+image_tmp=$tmpdir/$filename.$extension
+
+cp $uzn_file $uzn_tmp
+cp $image_file $image_tmp
+
+echo "Processing in $tmpdir"
+
+tesseract $image_tmp stdout -psm 4
