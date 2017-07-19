@@ -8,6 +8,14 @@ Simplify the process of feeding zone files (`.uzn` files) to tesseract for regio
 tesseract-uzn uznfile.uzn imagefile.png
 ```
 
+### Use on multiple files
+
+We now support **wildcards!** Hooray.
+
+```bash
+tesseract-uzn uznfile.uzn *.png
+```
+
 ## Installation
 
 Download as a zip file using the button on the top right, then unzip it. After that, `cd` into that folder move it to `/usr/local/bin` with the following command
