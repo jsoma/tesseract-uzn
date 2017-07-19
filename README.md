@@ -1,6 +1,6 @@
 # tesseract-uzn: Easy uzn files with tesseract
 
-Simplify the process of feeding zone files (`.uzn` files) to tesseract for region-based OCR. It will create a text file for ever image you're dealing with.
+Simplify the process of feeding zone files (`.uzn` files) to tesseract for region-based OCR. It will create a text file for every image you're dealing with.
 
 ## Usage
 
