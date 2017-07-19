@@ -1,12 +1,22 @@
 # tesseract-uzn: Easy uzn files with tesseract
 
-Simplify the process of feeding zone files (`.uzn` files) to tesseract for region-based OCR.
+Simplify the process of feeding zone files (`.uzn` files) to tesseract for region-based OCR. It will create a text file for ever image you're dealing with.
 
 ## Usage
 
 ```bash
 tesseract-uzn uznfile.uzn imagefile.png
 ```
+
+## Installation
+
+Download as a zip file using the button on the top right, then unzip it. After that, `cd` into that folder move it to `/usr/local/bin` with the following command
+
+```bash
+mv tesseract-uzn /usr/local/bin
+```
+
+That way no matter where you are when you type `tesseract-uzn` it'll be available.
 
 ## Backstory
 
@@ -35,7 +45,7 @@ You can use [Kull](https://jsoma.github.io/kull/) to make UZN files if you'd lik
 
 ## TODO
 
-* [ ] Non-stdout input
+* [X] non-stdout input
 * [ ] Windows support
-* [ ] Accept wildcards
+* [X] Accept wildcards
 * [ ] Tests

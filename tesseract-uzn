@@ -1,17 +1,10 @@
 # Copy everything to a temp directory
 
 uzn_file=$1
-image_file=$2
 
 if [ ! -f $uzn_file ]
 then
   echo "Cannot find $uzn_file, exiting" 1>&2
-  exit 1
-fi
-
-if [ ! -f $image_file ]
-then
-  echo "Cannot find $image_file, exiting" 1>&2
   exit 1
 fi
 
@@ -23,17 +16,31 @@ else
   exit 1
 fi
 
-tmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir'`
+for image_file in "${@:2}" ; do
 
-filename=$(basename "$image_file")
-extension=${image_file#*.}
+  if [ ! -f "$image_file" ]
+  then
+    echo "Cannot find $image_file, exiting" 1>&2
+    exit 1
+  fi
 
-uzn_tmp=$tmpdir/$filename.uzn
-image_tmp=$tmpdir/$filename.$extension
+  echo "Processing $image_file"
 
-cp $uzn_file $uzn_tmp
-cp $image_file $image_tmp
+  tmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir'`
 
-echo "Processing in $tmpdir"
+  dirname="$(dirname \"$image_file\")"
+  filename="$(basename \"$image_file\")"
+  extension="${image_file#*.}"
 
-tesseract $image_tmp stdout -psm 4
+  uzn_tmp="$tmpdir/$filename.uzn"
+  image_tmp="$tmpdir/$filename.$extension"
+  txt_target="$dirname/$filename"
+
+  cp "$uzn_file" "$uzn_tmp"
+  cp "$image_file" "$image_tmp"
+
+  echo "Processing in $tmpdir"
+
+  tesseract "$image_tmp" "$txt_target" -psm 4
+
+done
