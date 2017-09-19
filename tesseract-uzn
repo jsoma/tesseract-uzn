@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# Copy everything to a temp directory
+bold=$(tput bold)
+normal=$(tput sgr0)
 
 uzn_file=$1
 
@@ -10,7 +11,7 @@ then
   exit 1
 fi
 
-if [[ ${uzn_file: -4} == ".uzn" ]]
+if [[ ${uzn_file##*.} == "uzn" ]]
 then
   :
 else
@@ -26,23 +27,31 @@ for image_file in "${@:2}" ; do
     exit 1
   fi
 
-  echo "Processing $image_file"
+  echo "${bold}Processing image file $image_file${normal}"
 
   tmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir'`
 
-  dirname="$(dirname \"$image_file\")"
-  filename="$(basename \"$image_file\")"
-  extension="${image_file#*.}"
+  directory="$(dirname "$image_file")"
+  filename="$(basename "$image_file")"
+  extension="${image_file##*.}"
 
   uzn_tmp="$tmpdir/$filename.uzn"
   image_tmp="$tmpdir/$filename.$extension"
-  txt_target="$dirname/$filename"
+  txt_target="$directory/$filename"
+
+  echo "Copying to temporary directory ${bold}$tmpdir${normal}"
 
   cp "$uzn_file" "$uzn_tmp"
   cp "$image_file" "$image_tmp"
 
-  echo "Processing in $tmpdir"
+  echo "Saving output to ${bold}$txt_target.txt${normal}"
 
-  tesseract "$image_tmp" "$txt_target" -psm 4
-
+  if ! tesseract "$image_tmp" "$txt_target" -psm 4
+  then
+    echo "Can't find the tesseract executable, make sure it's in your PATH" 1>&2
+    exit 1
+  fi
+  echo ""
 done
+
+echo "${bold}Done.${normal}"

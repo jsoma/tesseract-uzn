@@ -26,6 +26,14 @@ mv tesseract-uzn /usr/local/bin
 
 That way no matter where you are when you type `tesseract-uzn` it'll be available.
 
+## Testing
+
+Just run this. It is a little chatty.
+
+```bash
+./test.sh
+```
+
 ## Backstory
 
 If you want to only have tesseract pay attention to certain areas of your image, you use a [uzn file](https://github.com/OpenGreekAndLatin/greek-dev/wiki/uzn-format). They look like this:
@@ -56,4 +64,4 @@ You can use [Kull](https://jsoma.github.io/kull/) to make UZN files if you'd lik
 * [X] non-stdout input
 * [ ] Windows support
 * [X] Accept wildcards
-* [ ] Tests
+* [X] Tests

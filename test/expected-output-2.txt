@@ -1,0 +1,8 @@
+TEST NUMBER TWO
+
+This text
+should be recognized
+when it is OCRd
+
+Another file to be scanned by tesseract
+
