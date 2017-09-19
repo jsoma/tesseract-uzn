@@ -1,14 +1,16 @@
+#!/usr/bin/env bash
+
 # Copy everything to a temp directory
 
 uzn_file=$1
 
-if [ ! -f $uzn_file ]
+if [[ ! -f $uzn_file ]]
 then
-  echo "Cannot find $uzn_file, exiting" 1>&2
+  echo "Cannot find uzn file $uzn_file, exiting" 1>&2
   exit 1
 fi
 
-if [ ${uzn_file: -4} == ".uzn" ]
+if [[ ${uzn_file: -4} == ".uzn" ]]
 then
   :
 else
@@ -18,9 +20,9 @@ fi
 
 for image_file in "${@:2}" ; do
 
-  if [ ! -f "$image_file" ]
+  if [[ ! -f "$image_file" ]]
   then
-    echo "Cannot find $image_file, exiting" 1>&2
+    echo "Cannot find image file $image_file, exiting" 1>&2
     exit 1
   fi
 
