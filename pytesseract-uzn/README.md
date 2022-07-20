@@ -6,4 +6,4 @@ If you read [this issue](https://github.com/madmaze/pytesseract/issues/178) you 
 
 Instead, we're going to **read in the uzn file manually, then loop through each zone**. In each loop, we'll use PIL to crop the image, and use pytesseract on the cropped image. And then we'll be done!
 
-You can see an actual example in [pytesseract and uzn files.ipynb](pytesseract and uzn files.ipynb).
+You can see an actual example in [this notebook](pytesseract.ipynb).

@@ -8,6 +8,10 @@ Simplify the process of feeding zone files (`.uzn` files) to tesseract for regio
 tesseract-uzn uznfile.uzn imagefile.png
 ```
 
+### Usage with pytesseract
+
+Don't use this with pytesseract! Instead, take a look at this folder here [pytesseract-uzn](pytesseract-uzn) for a useful notebook about how to use uzn files and pytesseract.
+
 ### Use on multiple files
 
 We now support **wildcards!** Hooray.
